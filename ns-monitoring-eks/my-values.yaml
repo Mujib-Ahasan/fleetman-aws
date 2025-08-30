@@ -1,0 +1,12 @@
+grafana:
+  adminPassword: Mujib-Prometheus-Pass
+  service:
+    type: LoadBalancer                 
+    port: 80
+  ingress:
+    enabled: false    
+
+# create "monitoring" namespace first.
+# command: helm install <release_name> oci://ghcr.io/prometheus-community/charts/kube-prometheus-stack -n monitoring \
+#   --create-namespace \
+#   -f my-values.yaml \

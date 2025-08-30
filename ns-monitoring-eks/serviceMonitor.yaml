@@ -1,0 +1,58 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: fleetman-webapp
+  namespace: monitoring   # ⚠️ must match Prometheus namespace
+spec:
+  selector:
+    matchLabels:
+      app: fleetman-webapp          # must match your Service's label
+  endpoints:
+  - port: http             # must match Service's port name
+    path: /metrics
+
+---
+
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: fleetman-queue
+  namespace: monitoring   
+spec:
+  selector:
+    matchLabels:
+      app: fleetman-queue          
+  endpoints:
+  - port: endpoint             
+    path: /metrics
+
+---
+
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: fleetman-position-tracker
+  namespace: monitoring   
+spec:
+  selector:
+    matchLabels:
+      app: fleetman-position-tracker          
+  endpoints:
+  - port: http             
+    path: /metrics
+
+---
+
+
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: fleetman-api-gateway
+  namespace: monitoring   
+spec:
+  selector:
+    matchLabels:
+      app: fleetman-api-gateway          
+  endpoints:
+  - port: http             
+    path: /metrics
