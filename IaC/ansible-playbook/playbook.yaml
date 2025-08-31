@@ -1,0 +1,75 @@
+- name: Installing eksctl, kubectl, and helm on my webserver
+  hosts: my-ec2-instance
+  become: yes
+  tasks:
+    - name: Download eksctl tarball   # eksctl download
+      get_url:
+        url: "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_Linux_amd64.tar.gz"
+        dest: "./eksctl.tar.gz"
+        mode: '0644'
+
+    - name: Extract eksctl
+      unarchive:
+        src: "./eksctl.tar.gz"
+        dest: "./"
+        remote_src: yes
+
+    - name: Move eksctl binary to /usr/local/bin
+      command: mv ./eksctl /usr/local/bin/eksctl
+      args:
+        creates: /usr/local/bin/eksctl
+
+    - name: Download kubectl binary   #kubectl download
+      get_url:
+        url: "https://dl.k8s.io/release/v1.33.0/bin/linux/amd64/kubectl"
+        dest: "./kubectl"
+        mode: '0755'
+
+    - name: Move kubectl to /usr/local/bin
+      command: mv ./kubectl /usr/local/bin/kubectl
+      args:
+        creates: /usr/local/bin/kubectl
+    - name: Download helm tarball
+      get_url:
+        url: "https://get.helm.sh/helm-v3.15.2-linux-amd64.tar.gz"
+        dest: "./helm.tar.gz"
+        mode: '0644'
+
+    - name: Extract helm    # get helm 
+      unarchive:
+        src: "./helm.tar.gz"
+        dest: "./"
+        remote_src: yes
+
+    - name: Move helm binary to /usr/local/bin
+      command: mv ./linux-amd64/helm /usr/local/bin/helm
+      args:
+        creates: /usr/local/bin/helm
+
+- name: Download raw Kubernetes manifests
+  hosts: my-ec2-instance
+  become: yes
+  tasks:
+    - name: downloading manifest files
+      get_url:
+        url: "{{ item.url }}"
+        dest: "{{ item.dest }}"
+      loop:
+        - { url: "https://raw.githubusercontent.com/Mujib-Ahasan/fleetman-aws/refs/heads/main/ns-default-eks/workloads.yaml", dest: "./workloads.yaml" }
+        - { url: "https://raw.githubusercontent.com/Mujib-Ahasan/fleetman-aws/refs/heads/main/ns-default-eks/storage.yaml", dest: "./storage-aws.yaml" }
+        - { url: "https://raw.githubusercontent.com/Mujib-Ahasan/fleetman-aws/refs/heads/main/ns-default-eks/service.yaml", dest: "./service.yaml"}
+        - {url: "https://raw.githubusercontent.com/Mujib-Ahasan/fleetman-aws/refs/heads/main/ns-default-eks/mongo-stack.yaml", dest: "./mongo-stack.yaml"}
+        - {url: "https://raw.githubusercontent.com/Mujib-Ahasan/fleetman-aws/refs/heads/main/ns-monitoring-eks/serviceMonitor.yaml", dest: "./serviceMonitor.yaml"}
+
+- name: Downloading the tools(logging and monitoring)
+  hosts: my-ec2-instance
+  become: yes
+  tasks: 
+    - name: getting EFK-stack - fluentd-configuration and EFK manifest files
+      get_url:
+        url: "{{ item.url }}"
+        dest:  "{{ item.dest }}"
+      loop:
+        - {url : "https://raw.githubusercontent.com/Mujib-Ahasan/EFK-stack/refs/heads/main/EFK-stack.yaml", dest: "./EFK_stack.yaml"}
+        - {url: "https://raw.githubusercontent.com/Mujib-Ahasan/EFK-stack/refs/heads/main/fluentd-config.yaml", dest: "./fluentd-config.yaml"}
+        - {url: "https://raw.githubusercontent.com/Mujib-Ahasan/fleetman-aws/refs/heads/main/ns-monitoring-eks/my-values.yaml", dest: "./my-custom-values.yaml"}
