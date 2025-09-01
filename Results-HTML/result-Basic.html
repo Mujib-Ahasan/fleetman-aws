@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Awesome go-echarts</title>
+    <script src="https://go-echarts.github.io/go-echarts-assets/assets/echarts.min.js"></script>
+</head>
+
+<body><div class="container">
+    <div class="item" id="pBOpJCOHdApM" style="width:900px;height:500px;"></div>
+</div><script type="text/javascript">
+    "use strict";
+    let goecharts_pBOpJCOHdApM = echarts.init(document.getElementById('pBOpJCOHdApM'), "white", { renderer: "canvas" });
+    let option_pBOpJCOHdApM = {"color":["#5470c6","#91cc75","#fac858","#ee6666","#73c0de","#3ba272","#fc8452","#9a60b4","#ea7ccc"],"legend":{"show":true,"left":"right"},"series":[{"name":"Time for Response","type":"line","data":[{"value":138},{"value":86},{"value":81},{"value":69},{"value":76},{"value":85},{"value":78},{"value":73},{"value":73},{"value":76},{"value":70},{"value":69},{"value":79},{"value":85},{"value":86},{"value":68},{"value":72},{"value":86},{"value":79},{"value":76},{"value":74},{"value":76},{"value":81},{"value":83},{"value":78},{"value":80},{"value":79},{"value":78},{"value":73},{"value":86},{"value":78},{"value":73},{"value":80},{"value":76},{"value":70},{"value":68},{"value":75},{"value":73},{"value":77},{"value":70},{"value":69},{"value":74},{"value":78},{"value":78},{"value":69},{"value":69},{"value":70},{"value":77},{"value":78},{"value":77}]}],"title":{"text":"Load Test Results","subtext":"Response Time per Second (RTPS)","left":"center"},"toolbox":{},"tooltip":{"show":true,"trigger":"axis","formatter":"{b} req<br/>⏱ {c} ms"},"xAxis":[{"name":"Request #","nameGap":25,"data":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50]}],"yAxis":[{"name":"Response Time (ms)","nameGap":30,"axisLabel":{"show":true,"formatter":"{value} ms","showMinLabel":null,"showMaxLabel":null}}]}
+
+    goecharts_pBOpJCOHdApM.setOption(option_pBOpJCOHdApM);
+</script>
+<style>
+    .container {margin-top:30px; display: flex;justify-content: center;align-items: center;}
+    .item {margin: auto;}
+</style>
+</body>
+</html>
+
+    <div style="display:flex; justify-content:center; margin-top:20px;">
+        <div style="padding:15px; border:1px solid #ccc; border-radius:8px; width:600px; font-family:Arial; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+            <h3 style="text-align:center; margin-bottom:10px;">⚡ Latency Percentiles</h3>
+            <table border="1" cellpadding="8" style="border-collapse:collapse; width:100%; text-align:center;">
+                <tr style="background-color:#f2f2f2;">
+                    <th>Metric</th>
+                    <th>p50</th>
+                    <th>p90</th>
+                    <th>p95</th>
+                    <th>p99</th>
+                </tr>
+                <tr>
+                    <td>Latency (ms)</td>
+                    <td>77.23</td>
+                    <td>86.13</td>
+                    <td>86.74</td>
+                    <td>138.98</td>
+                </tr>
+            </table>
+        </div>
+    </div>
