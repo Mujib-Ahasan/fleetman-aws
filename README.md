@@ -45,8 +45,8 @@
  manually and Kibana with a dedicated server. But Our approach is the most easy one and fulfill the requirements.
   **Note: Once done, checkout the service, copy the url name and paste in the browser. Once again it might take few moments to start**
 - Get metrics-server just local console based provisioning and autoscaling (HPA): 
-      - `helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server` : This adds the repo.
-      - `helm upgrade --install metrics-server metrics-server/metrics-server --namespace kube-system --set args={"--kubelet-insecure-tls"}`: install and start the metrics server.
+     - `helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server` : This adds the repo.
+     - `helm upgrade --install metrics-server metrics-server/metrics-server --namespace kube-system --set args={"--kubelet-insecure-tls"}`: installs and start the metrics server.
 - Applying monitoring using helm: 
    helm was downloaded using ansible in the VM. We also have `my-custom-values.yaml` to set up the loadBalancer and password. Apply the command: </br>
    `helm install <release_name> oci://ghcr.io/prometheus-community/charts/kube-prometheus-stack -n monitoring  --create-namespace -f my-custom-values.yaml`</br>
