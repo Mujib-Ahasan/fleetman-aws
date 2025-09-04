@@ -23,10 +23,8 @@ spec:
   selector: 
     app: queue
   ports:
-  # - name: http
-  #   port: 8161
-  #   nodePort: 30010
-    # targetPort: 8161
+  - name: http
+    port: 8161
   - name: endpoint
     port: 61616
   type: ClusterIP    # for testing u can give it a NodePort
